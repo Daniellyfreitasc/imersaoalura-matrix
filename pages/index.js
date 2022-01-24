@@ -64,7 +64,7 @@ function GlobalStyle() {
 // export default HomePage
 
 export default function PaginaInicial() {
-    const username = 'peas';
+    const username = 'Daniellyfreitasc';
   
     return (
       <>
@@ -72,7 +72,7 @@ export default function PaginaInicial() {
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            backgroundColor: appConfig.theme.colors.primary[500],
+            backgroundColor: appConfig.theme.colors.primary['600'],
             backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
             backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
           }}
@@ -89,7 +89,7 @@ export default function PaginaInicial() {
               width: '100%', maxWidth: '700px',
               borderRadius: '5px', padding: '32px', margin: '16px',
               boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
-              backgroundColor: appConfig.theme.colors.neutrals[700],
+              backgroundColor: appConfig.theme.colors.neutrals['700'],
             }}
           >
             {/* Formulário */}
