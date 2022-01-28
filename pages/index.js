@@ -72,8 +72,8 @@ export default function PaginaInicial() {
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            backgroundColor: appConfig.theme.colors.primary['800'],
-            backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+            backgroundColor: appConfig.theme.colors.primary['000'],
+            backgroundImage: 'url(https://www.10wallpaper.com/wallpaper/1366x768/2001/Street_night_After_rain_2019_Cities_HD_Photo_1366x768.jpg)',
             backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
           }}
         >
@@ -100,7 +100,7 @@ export default function PaginaInicial() {
                 width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
               }}
             >
-              <Titulo tag="h2">Boas vindas de volta!</Titulo>
+              <Titulo tag="h2">Sinta-se à vontade!</Titulo>
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals['300'] }}>
                 {appConfig.name}
               </Text>
@@ -121,10 +121,10 @@ export default function PaginaInicial() {
                 label='Entrar'
                 fullWidth
                 buttonColors={{
-                  contrastColor: appConfig.theme.colors.neutrals["050"],
-                  mainColor: appConfig.theme.colors.primary['500'],
-                  mainColorLight: appConfig.theme.colors.primary['300'],
-                  mainColorStrong: appConfig.theme.colors.primary['600'],
+                  contrastColor: appConfig.theme.colors.neutrals["000"],
+                  mainColor: appConfig.theme.colors.primary['050'],
+                  mainColorLight: appConfig.theme.colors.primary['000'],
+                  mainColorStrong: appConfig.theme.colors.primary['000'],
                 }}
               />
             </Box>
