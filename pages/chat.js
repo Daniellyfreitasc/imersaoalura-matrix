@@ -1,8 +1,18 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
+import { useRouter } from 'next/router';
 import appConfig from './config.json';
+import { createClient } from '@supabase/supabase-js'
+
+
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzgwNzc0MywiZXhwIjoxOTU5MzgzNzQzfQ.DIAZCwFcGZrEhGmoH68P6GLu1uhNfaaKZB_YopIUTwk';
+const SUPABASE_URL = 'https://pxrhoczditwvuyhgccbs.supabase.co';
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 
 export default function ChatPage() {
+    const roteamento = useRouter();
+    const usuarioLogado = roteamento.query.username;
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
     /*
@@ -16,21 +26,51 @@ export default function ChatPage() {
     - usar onChange, useState (ter if para caso seja enter limpar a variavel)
     - listar as mensagens
     */
+   React.useEffect(() => {
+    supabaseClient
+        .from('mensagens')
+        .select('*')
+        .order('id', { ascending: false })
+        .then(({data}) =>{
+            console.log('Dados da consulta', data);
+            setListaDeMensagens(data);
+        });
+   }, []);
+    
 
-    function handleNovaMensagem (novaMensagem) {
+    function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length + 1,
-            de: 'vanessametonini',
-            texto: novaMensagem,
+        // id: listaDeMensagens.length + 1,
+        de: usuarioLogado,
+        texto: novaMensagem,
         };
-        setListaDeMensagens([
-            mensagem,
-            ...listaDeMensagens,
-        ]);
-        setMensagem('');
+
+        supabaseClient
+            .from('mensagens')
+            .insert([
+                // Tem que ser um objeto com os MESMOS CAMPOS que você escreveu no supabase
+                mensagem
+            ])
+            .then(({ data }) => {
+                console.log('Criando mensagem: ', data);
+                setListaDeMensagens([
+                    mensagem,
+                    ...listaDeMensagens,
+                    data[0],
+                    ...listaDeMensagens,
+                ]);
+            });
+            return (
+                setMensagem('')
+            )
     }
 
+
+
+
     return (
+
+        // Imagem
         <Box
             styleSheet={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -41,16 +81,27 @@ export default function ChatPage() {
             }}
         >
             <Box
+
+            //
                 styleSheet={{
                     display: 'flex',
                     flexDirection: 'column',
                     flex: 1,
                     boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
                     borderRadius: '5px',
-                    backgroundColor: appConfig.theme.colors.neutrals[700],
+                    backgroundColor: appConfig.theme.colors.background.fundoBlack,
                     height: '100%',
-                    maxWidth: '95%',
-                    maxHeight: '95vh',
+                    maxWidth: {
+                        md: '70%',
+                        sm: '95%',
+                        xs: '95%',
+                    },
+                    maxHeight: '93vh',
+                    padding: {
+                        md: '40px',
+                        sm: '20px',
+                        xs: '20px',
+                    },
                     padding: '32px',
                 }}
             >
@@ -96,6 +147,7 @@ export default function ChatPage() {
                             }}
                             placeholder="Insira sua mensagem aqui..."
                             type="textarea"
+                            
                             styleSheet={{
                                 width: '100%',
                                 border: '0',
@@ -173,7 +225,7 @@ function MessageList(props) {
                                     display: 'inline-block',
                                     marginRight: '8px',
                                 }}
-                                src={`https://github.com/vanessametonini.png`}
+                                src={`https://github.com/${mensagem.de}.png`}
                             />
                             <Text tag="strong">
                                 {mensagem.de}

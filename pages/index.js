@@ -73,7 +73,7 @@ export default function PaginaInicial() {
               onSubmit = {function (infosdoEvento) {
                   infosdoEvento.preventDefault();
                   console.log('Página submetida por alguém');
-                  roteamento.push('/chat');
+                  roteamento.push(`/chat?username=${username}`);
                   // window.location.href = '/chat'; - é como o react usaria a transição de página
                   // a próxima será feita com next.js para um melhor refresh
                   

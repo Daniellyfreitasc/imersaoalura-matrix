@@ -35,6 +35,16 @@
                 "800": "#181F25",
                 "900": "#101418",
                 "999": "#080A0C"
+            },
+            "button":{
+                "buttonRed": "#800000",
+                "buttonRedTransparente": "rgba(128,0,0,0.5)",
+                "buttonBlack": "#1C1C1C", 
+                "buttonBlackTransparente": "rgba(0, 0, 0, 0.7)"
+            }, 
+            "background":{
+                "fundoBlack": "rgba(0, 0, 0, 0.7)",
+                "fundoRed": "rgba(128,0,0,0.5)"
             }
         }
     }
